@@ -1,0 +1,29 @@
+---
+title: "Security"
+description: "Secure your API operations"
+category_slug: security
+---
+
+import PageLayout from "../../src/components/PageLayout";
+import { DefineStandardOption } from "../../src/DefineStandardOption";
+
+export const AuthOnEverything = DefineStandardOption(
+  "Auth on every operation",
+  "auth_on_every",
+  frontMatter.category_slug,
+  "spectral",
+  false,
+  (spectral, optic) => {
+    spectral.extends.push("https://github.com/shared-spectral/security-1");
+  }
+);
+
+### Auth on every operation
+
+Require Auth on every operation
+
+<AuthOnEverything />
+
+export default function (props) {
+  return <PageLayout {...props} frontMatter={frontMatter} />;
+}

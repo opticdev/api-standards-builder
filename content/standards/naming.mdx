@@ -1,0 +1,104 @@
+---
+title: "Naming"
+description: "Consistent naming across your API"
+category_slug: naming
+---
+
+import PageLayout from "../../src/components/PageLayout";
+import { DefineStandardOption } from "../../src/DefineStandardOption";
+
+... other documentation
+
+## Naming Response Properties
+
+Response Properties are likely to become symbols in your consumer's code. Because of that it's best to use `snake_case` or `camelCase` as most programming languages do not support `-` in a variable's name.
+
+export const NamingConsistent = DefineStandardOption(
+  "Consistent Naming across the API",
+  "consistent_naming",
+  frontMatter.category_slug,
+  "optic",
+  false,
+  (spectral, optic) => {
+    spectral.extends.push("https://github.com/shared-spectral/security-1");
+  },
+  {
+    defaultValue: { required_on: "added" },
+    configSchema: {
+      type: "object",
+      properties: {
+        required_on: {
+          type: "string",
+          enum: ["added", "addedOrChanged", "always"],
+        },
+        requestHeaders: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+        queryParameters: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+        responseHeaders: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+        cookieParameters: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+        pathComponents: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+        properties: {
+          type: "string",
+          enum: [
+            "snake_case",
+            "camelCase",
+            "Capital-Param-Case",
+            "param-case",
+            "PascalCase",
+          ],
+        },
+      },
+      additionalProperties: false,
+    },
+  }
+);
+
+<NamingConsistent />
+
+export default function (props) {
+  return <PageLayout {...props} frontMatter={frontMatter} />;
+}

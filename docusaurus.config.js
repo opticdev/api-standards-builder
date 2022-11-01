@@ -42,6 +42,15 @@ const config = {
       navbar: {
         title: "API Standards",
         items: [
+          { label: "All Standards", position: "left", href: "/" },
+          { label: "Naming", position: "left", href: "/standards/urls" },
+          { label: "URLs", position: "left", href: "/standards/urls" },
+          {
+            label: "Breaking Changes",
+            position: "left",
+            href: "/standards/urls",
+          },
+          { label: "Security", position: "left", href: "/standards/security" },
           {
             html:
               "<span class='tailwind' ><button class=\"bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded\">\n" +

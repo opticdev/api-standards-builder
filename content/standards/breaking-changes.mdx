@@ -1,26 +1,39 @@
 ---
 title: "Breaking changes"
 category_slug: "breaking-changes"
+description: Do not ship backwards-incompatible changes to APIs
 ---
 
-import { ExclusiveToggle } from "../../src/components/buttons/ExclusiveToggle";
+import {DefineStandardOption} from '../../src/DefineStandardOption';
+
+export const OpticBreakingChangeRules = DefineStandardOption(
+  "Breaking Changes",
+  "breaking_changes",
+  frontMatter.category_slug,
+  "optic",
+  true,
+  (spectral, optic) => {},
+  {
+    configSchema: {
+      type: "object",
+      properties: {
+        exclude_operations_with_extension: {
+          type: "string",
+        },
+      },
+      additionalProperties: false,
+    },
+    defaultValue: {
+      exclude_operations_with_extension: "x-draft",
+    },
+  }
+);
 
 import PageLayout from "../../src/components/PageLayout";
 
-<ExclusiveToggle
-  name="Breaking Changes"
-  id="breaking-changes"
-  configSchema={{
-    type: "object",
-    properties: {
-      exclude_operations_with_extension: {
-        type: "string",
-        description: "operations with this extension will be skipped. ",
-      },
-    },
-    additionalProperties: false,
-  }}
-/>
+Breaking changes are so bad
+
+<OpticBreakingChangeRules />
 
 export default function (props) {
   return <PageLayout {...props} frontMatter={frontMatter} />;

@@ -2,4 +2,48 @@
 title: "URL patterns"
 ---
 
-fdsafsd
+import PageLayout from "../../src/components/PageLayout";
+import { DefineStandardOption } from "../../src/DefineStandardOption";
+
+export const Pattern1 = DefineStandardOption(
+  "Pattern 1",
+  "pattern_1",
+  frontMatter.category_slug,
+  "spectral",
+  true,
+  (spectral, optic) => {}
+);
+
+### Pattern 1
+
+<Pattern1 />
+
+### Pattern 2
+
+export const Pattern2 = DefineStandardOption(
+  "Pattern 2",
+  "pattern_2",
+  frontMatter.category_slug,
+  "spectral",
+  true,
+  (spectral, optic) => {}
+);
+
+<Pattern2 />
+
+### Pattern 3
+
+export const Pattern3 = DefineStandardOption(
+  "Pattern 3",
+  "pattern_3",
+  frontMatter.category_slug,
+  "spectral",
+  true,
+  (spectral, optic) => {}
+);
+
+<Pattern3 />
+
+export default function (props) {
+  return <PageLayout {...props} frontMatter={frontMatter} />;
+}

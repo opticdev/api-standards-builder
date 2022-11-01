@@ -252,3 +252,22 @@ pre {
   background-color: black;
   color: white;
 }
+
+.text-truncate {
+  overflow: visible !important;
+  text-overflow: initial !important;
+  white-space: normal !important;
+}
+
+fieldset {
+  border: none;
+  outline: none;
+}
+
+label {
+  margin-right: 15px;
+}
+
+.form-group {
+  margin-bottom: 4px;
+}

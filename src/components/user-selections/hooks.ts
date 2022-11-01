@@ -9,10 +9,10 @@ const localStorageKey = `user-selections-v${version}`;
 
 type SelectionWithConfig<Config> = {
   id: string;
-  config: {} & Config;
+  config?: {} & Config;
 };
 
-type UserSelections = {
+export type UserSelections = {
   exclusiveSelections: {
     [key: string]: SelectionWithConfig<any>;
   };
@@ -26,11 +26,14 @@ Hooks the buttons can use
 export function useSelections(): [
   UserSelections,
   {
+    resetAll: () => void;
     setExclusiveSelection: (
       key: string,
       config: SelectionWithConfig<any>
     ) => void;
     unsetExclusiveSelection: (key: string) => void;
+    setNonExclusiveSelection: (config: SelectionWithConfig<any>) => void;
+    unsetNonExclusiveSelection: (id: string) => void;
   }
 ] {
   const [selections, setSelections] = useLocalStorage<UserSelections>(
@@ -60,6 +63,30 @@ export function useSelections(): [
           const copy = JSON.parse(JSON.stringify(prev));
           delete copy.exclusiveSelections[key];
           return copy;
+        });
+      },
+      setNonExclusiveSelection: (item) => {
+        setSelections((prev) => {
+          return {
+            ...prev,
+            nonExclusiveSelections: [
+              ...prev.nonExclusiveSelections.filter((i) => i.id !== item.id),
+              item,
+            ],
+          };
+        });
+      },
+      resetAll: () => {
+        setSelections({ nonExclusiveSelections: [], exclusiveSelections: {} });
+      },
+      unsetNonExclusiveSelection: (key) => {
+        setSelections((prev) => {
+          return {
+            ...prev,
+            nonExclusiveSelections: prev.nonExclusiveSelections.filter(
+              (i) => i.id !== key
+            ),
+          };
         });
       },
     },

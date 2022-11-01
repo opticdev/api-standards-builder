@@ -1,16 +1,19 @@
 import React, { useCallback, useState } from "react";
 import {
   CheckCircleIcon,
+  CheckIcon,
   MinusCircleIcon,
   MinusIcon,
   PlusIcon,
+  StopIcon,
   XIcon,
 } from "@heroicons/react/solid";
-import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
 import { useSelections } from "@site/src/components/user-selections/hooks";
 import { JsonSchemaConfigForm } from "@site/src/components/JsonSchemaConfigForm";
 
-export function ExclusiveToggle(props: {
+import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
+
+export function NonExclusiveToggle(props: {
   name: string;
   category: string;
   id: string;
@@ -23,28 +26,26 @@ export function ExclusiveToggle(props: {
 
   const { category } = props;
 
-  const selection =
-    selections.exclusiveSelections[category] &&
-    selections.exclusiveSelections[category].id === props.id;
+  const selectedValue = selections.nonExclusiveSelections.find(
+    (i) => i.id === props.id
+  );
 
-  const selected = Boolean(selection);
-
-  const selectedValue = selection && selections.exclusiveSelections[category];
+  const selected = Boolean(selectedValue);
 
   const addIt = useCallback(() => {
-    actions.setExclusiveSelection(category, {
+    actions.setNonExclusiveSelection({
       id: props.id,
       config: props.config?.defaultValue,
     });
   }, [props.id, category, actions]);
 
   const unsetIt = useCallback(() => {
-    actions.unsetExclusiveSelection(category);
+    actions.unsetNonExclusiveSelection(props.id);
   }, [category, actions]);
 
   const changeConfig = useCallback(
     (config) => {
-      actions.setExclusiveSelection(category, { id: props.id, config });
+      actions.setNonExclusiveSelection({ id: props.id, config });
     },
     [category, actions]
   );
@@ -57,7 +58,7 @@ export function ExclusiveToggle(props: {
           className="bg-gray-100 hover:bg-gray-50 flex flex-row text-black font-bold py-2 pr-4 pl-2 rounded  mb-3"
           style={{ border: "1px solid black" }}
         >
-          <CheckCircleIcon height={15} width={15} style={{ marginRight: 10 }} />
+          <CheckIcon height={15} width={15} style={{ marginRight: 10 }} />
           <span>
             Stop using <u>{props.name}</u>
           </span>
@@ -86,7 +87,7 @@ export function ExclusiveToggle(props: {
           style={{ marginRight: 10 }}
         />
         <span>
-          Use <u>{props.name}</u> Standard
+          Add <u>{props.name}</u> Standard
         </span>
       </button>
     );
