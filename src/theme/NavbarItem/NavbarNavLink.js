@@ -5,6 +5,7 @@ import isInternalUrl from "@docusaurus/isInternalUrl";
 import { isRegexpStringMatch } from "@docusaurus/theme-common";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import FinishButton from "@site/src/components/FinishButton";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 export default function NavbarNavLink({
   activeBasePath,
   activeBaseRegex,
@@ -40,7 +41,7 @@ export default function NavbarNavLink({
       };
   if (href) {
     if (id === "override-finish") {
-      return <FinishButton />;
+      return <BrowserOnly>{() => <FinishButton />}</BrowserOnly>;
     }
     return (
       <Link
