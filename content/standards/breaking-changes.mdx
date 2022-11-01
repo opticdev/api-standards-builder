@@ -1,0 +1,27 @@
+---
+title: "Breaking changes"
+category_slug: "breaking-changes"
+---
+
+import { ExclusiveToggle } from "../../src/components/buttons/ExclusiveToggle";
+
+import PageLayout from "../../src/components/PageLayout";
+
+<ExclusiveToggle
+  name="Breaking Changes"
+  id="breaking-changes"
+  configSchema={{
+    type: "object",
+    properties: {
+      exclude_operations_with_extension: {
+        type: "string",
+        description: "operations with this extension will be skipped. ",
+      },
+    },
+    additionalProperties: false,
+  }}
+/>
+
+export default function (props) {
+  return <PageLayout {...props} frontMatter={frontMatter} />;
+}
